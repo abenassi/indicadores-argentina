@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Indicadores Argentina</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" media="all" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/datosgobar/series-tiempo-ar-explorer@ts_components_2.2.1/dist/css/components.css" type="text/css">
+    <style>
+    .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+        }
+    }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/4.3/examples/dashboard/dashboard.css" rel="stylesheet">
+</head>
+<style>
+.row {
+    /*width: 90%;*/
+    /*margin: 0 76px 0 76px;*/
+    padding: 20px 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.title {
+    padding: 3px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.full-height {
+    height: 100%;
+}
+
+#ipc-evolucion {
+    height: 350px;
+}
+
+
+body {
+    font-family: roboto;
+}
+</style>
+
+<body>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Dashboard Series de Tiempo</a>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="#">Volver</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+              <span data-feather="home"></span>
+              Inicio <span class="sr-only">(current)</span>
+            </a>
+                        </li>
+                        <!--
+                       <li class="nav-item">
+                            <a class="nav-link" href="#">
+              <span data-feather="file"></span>
+              Economía
+            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+              <span data-feather="users"></span>
+              Energía
+            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+              <span data-feather="bar-chart-2"></span>
+              Salud
+            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+              <span data-feather="layers"></span>
+              Defensa
+            </a>
+                        </li>
+                    </ul>
+-->
+            </nav>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Inicio</h1>
+                </div>
+                <div class="container">
+                    <div class="title">
+                        <h3>Actividad</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col" id='emae-mensual-desest'></div>
+                        <div class="col" id='emae-interanual'></div>
+                        <div class="col" id='isac-mensual'> </div>
+                        <div class="col" id='isac-interanual'> </div>
+                    </div>
+                    <div class="row">
+                        <div class="col full-height full-width" id='emae-evolucion'></div>
+                        <div class="col full-height full-width" id='isac-evolucion'></div>
+                    </div>
+                    <div class="title">
+                        <h3>Precios</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col" id='ipc-mensual'></div>
+                        <div class="col" id='ipc-interanual'> </div>
+                        <div class="col-6" id='ipc-evolucion'></div>
+                    </div>
+                    <div class="title">
+                        <h3>Sector Externo</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col full-height full-width" id='itcrm-exportaciones'></div>
+                    </div>
+                </div>
+            </main>
+            </div>
+        </div>
+        <script>
+        window.onload = function() {
+            // COLORES SUGERIDOS "#0072BB","#2E7D33","#C62828","#F9A822","#6A1B99", "#EC407A","#C2185B","#6A1B99","#039BE5","#6EA100"
+            // componentes de series de tiempo
+
+            // actividad
+            TSComponents.Card.render('emae-mensual-desest', {
+                serieId: '143.3_NO_PR_2004_A_31:percent_change',
+                hasChart: "small",
+                color: "#0072BB",
+                links: "none",
+                explicitSign: true
+            })
+
+            TSComponents.Card.render('emae-interanual', {
+                serieId: '143.3_NO_PR_2004_A_21:percent_change_a_year_ago',
+                hasChart: "small",
+                color: "#2E7D33",
+                links: "none",
+                explicitSign: true
+            })
+
+            TSComponents.Card.render('isac-mensual', {
+                serieId: '33.2_ISAC_NIVELRAL_0_M_18_63:percent_change',
+                hasChart: "small",
+                color: "#0072BB",
+                links: "none",
+                explicitSign: true
+            })
+
+            TSComponents.Card.render('isac-interanual', {
+                serieId: '33.2_ISAC_NIVELRAL_0_M_18_63:percent_change_a_year_ago',
+                hasChart: "small",
+                color: "#2E7D33",
+                links: "none",
+                explicitSign: true
+            })
+
+            TSComponents.Graphic.render('emae-evolucion', {
+                graphicUrl: "https://apis.datos.gob.ar/series/api/series?ids=143.3_NO_PR_2004_A_31:percent_change,143.3_NO_PR_2004_A_21:percent_change_a_year_ago&start_date=2018",
+                colors: ["#0072BB", "#2E7D33"],
+                chartTypes: {
+                    "143.3_NO_PR_2004_A_31:percent_change": "column",
+                    "143.3_NO_PR_2004_A_21:percent_change_a_year_ago": "column"
+                },
+                datePickerEnabled: false,
+                displayUnits: false,
+                title: "EMAE",
+                zoom: true,
+                legendLabel: {
+                    "143.3_NO_PR_2004_A_31:percent_change": "EMAE desestacionalizado (% mensual)",
+                    "143.3_NO_PR_2004_A_21:percent_change_a_year_ago": "EMAE (% interanual)"
+                }
+            })
+
+            TSComponents.Graphic.render('isac-evolucion', {
+                graphicUrl: "https://apis.datos.gob.ar/series/api/series?ids=33.2_ISAC_NIVELRAL_0_M_18_63:percent_change,33.2_ISAC_NIVELRAL_0_M_18_63:percent_change_a_year_ago&start_date=2018",
+                colors: ["#C62828", "#F9A822"],
+                chartTypes: {
+                    "33.2_ISAC_NIVELRAL_0_M_18_63:percent_change": "column",
+                    "33.2_ISAC_NIVELRAL_0_M_18_63:percent_change_a_year_ago": "column"
+                },
+                datePickerEnabled: false,
+                displayUnits: false,
+                title: "ISAC",
+                zoom: true,
+                legendLabel: {
+                    "33.2_ISAC_NIVELRAL_0_M_18_63:percent_change": "ISAC (% mensual)",
+                    "33.2_ISAC_NIVELRAL_0_M_18_63:percent_change_a_year_ago": "ISAC (% interanual)"
+                }
+            })
+
+            // precios
+            TSComponents.Card.render('ipc-mensual', {
+                serieId: '148.3_INIVELNAL_DICI_M_26:percent_change',
+                hasChart: "small",
+                // color: "#C62828",
+                color: "#0072BB",
+                links: "none",
+            })
+
+            TSComponents.Card.render('ipc-interanual', {
+                serieId: '148.3_INIVELNAL_DICI_M_26:percent_change_a_year_ago',
+                hasChart: "small",
+                // color: "#F9A822",
+                color: "#2E7D33",
+                links: "none",
+            })
+
+            TSComponents.Graphic.render('ipc-evolucion', {
+                graphicUrl: "https://apis.datos.gob.ar/series/api/series?ids=148.3_INIVELNAL_DICI_M_26:percent_change,148.3_INIVELNAL_DICI_M_26:percent_change_a_year_ago&start_date=2018",
+                colors: ["#C62828", "#F9A822"],
+                chartTypes: {
+                    "148.3_INIVELNAL_DICI_M_26:percent_change": "column",
+                    "148.3_INIVELNAL_DICI_M_26:percent_change_a_year_ago": "line"
+                },
+                seriesAxis: {
+                    "148.3_INIVELNAL_DICI_M_26:percent_change": "right",
+                    "148.3_INIVELNAL_DICI_M_26:percent_change_a_year_ago": "left"
+                },
+                datePickerEnabled: false,
+                displayUnits: false,
+                // title: "IPC",
+                zoom: false,
+                navigator: false,
+                legendLabel: {
+                    "148.3_INIVELNAL_DICI_M_26:percent_change": "IPC (% mensual)",
+                    "148.3_INIVELNAL_DICI_M_26:percent_change_a_year_ago": "IPC (% interanual)"
+                }
+            })
+
+            TSComponents.Graphic.render('itcrm-exportaciones', {
+                graphicUrl: "https://apis.datos.gob.ar/series/api/series?ids=116.4_TCRZE_2015_D_36_4,75.3_IETG_0_M_31",
+                chartTypes: {
+                    "75.3_IETG_0_M_31": "column"
+                },
+                seriesAxis: {
+                    "75.3_IETG_0_M_31": "right"
+                },
+                datePickerEnabled: true,
+                displayUnits: true,
+                // title: "IPC",
+                zoom: true,
+                navigator: true,
+                legendLabel: {
+                    "116.4_TCRZE_2015_D_36_4": "ITCRM",
+                    "75.3_IETG_0_M_31": "Exportaciones FOB"
+                }
+            })
+
+        }
+        </script>
+        <script type='text/javascript' src='https://cdn.jsdelivr.net/gh/datosgobar/series-tiempo-ar-explorer@ts_components_2.2.1/dist/js/components.js'></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+        <script src="https://getbootstrap.com/docs/4.3/examples/dashboard/dashboard.js"></script>
+</body>
+
+</html>
