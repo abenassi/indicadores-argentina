@@ -137,6 +137,12 @@ body {
                         <h3>Sector Externo</h3>
                     </div>
                     <div class="row">
+                        <div class="col" id='itcrm'></div>
+                        <div class="col" id='itcrm-interanual'></div>
+                        <div class="col" id='exportaciones'></div>
+                        <div class="col" id='exportaciones-interanual'></div>
+                    </div>
+                    <div class="row">
                         <div class="col full-height full-width" id='itcrm-exportaciones'></div>
                     </div>
                 </div>
@@ -154,7 +160,9 @@ body {
                 hasChart: "small",
                 color: "#0072BB",
                 links: "none",
-                explicitSign: true
+                explicitSign: true,
+                title: "EMAE desest. (% mensual)",
+                units: ""
             })
 
             TSComponents.Card.render('emae-interanual', {
@@ -162,7 +170,9 @@ body {
                 hasChart: "small",
                 color: "#2E7D33",
                 links: "none",
-                explicitSign: true
+                explicitSign: true,
+                title: "EMAE (% interanual)",
+                units: ""
             })
 
             TSComponents.Card.render('isac-mensual', {
@@ -170,7 +180,9 @@ body {
                 hasChart: "small",
                 color: "#0072BB",
                 links: "none",
-                explicitSign: true
+                explicitSign: true,
+                title: "ISAC (% mensual)",
+                units: ""
             })
 
             TSComponents.Card.render('isac-interanual', {
@@ -178,7 +190,9 @@ body {
                 hasChart: "small",
                 color: "#2E7D33",
                 links: "none",
-                explicitSign: true
+                explicitSign: true,
+                title: "ISAC (% interanual)",
+                units: ""
             })
 
             TSComponents.Graphic.render('emae-evolucion', {
@@ -222,6 +236,7 @@ body {
                 // color: "#C62828",
                 color: "#0072BB",
                 links: "none",
+                title: "IPC mensual"
             })
 
             TSComponents.Card.render('ipc-interanual', {
@@ -230,6 +245,7 @@ body {
                 // color: "#F9A822",
                 color: "#2E7D33",
                 links: "none",
+                title: "IPC interanual"
             })
 
             TSComponents.Graphic.render('ipc-evolucion', {
@@ -252,6 +268,42 @@ body {
                     "148.3_INIVELNAL_DICI_M_26:percent_change": "IPC (% mensual)",
                     "148.3_INIVELNAL_DICI_M_26:percent_change_a_year_ago": "IPC (% interanual)"
                 }
+            })
+
+            // sector externo
+            TSComponents.Card.render('itcrm', {
+                serieId: '116.4_TCRZE_2015_D_36_4',
+                hasChart: "none",
+                links: "none",
+                title: "ITCRM"
+            })
+
+            TSComponents.Card.render('itcrm-interanual', {
+                serieId: '116.4_TCRZE_2015_D_36_4:percent_change_a_year_ago',
+                hasChart: "none",
+                color: "#039BE5",
+                links: "none",
+                title: "ITCRM (interanual)",
+                explicitSign: true
+            })
+
+            TSComponents.Card.render('exportaciones', {
+                serieId: '75.3_IETG_0_M_31',
+                hasChart: "none",
+                // color: "#F9A822",
+                color: "#C2185B",
+                links: "none",
+                title: "Exportaciones (USD FOB)"
+            })
+
+            TSComponents.Card.render('exportaciones-interanual', {
+                serieId: '75.3_IETG_0_M_31:percent_change_a_year_ago',
+                hasChart: "none",
+                // color: "#F9A822",
+                color: "#EC407A",
+                links: "none",
+                title: "Exportaciones (USD FOB - interanual)",
+                explicitSign: true
             })
 
             TSComponents.Graphic.render('itcrm-exportaciones', {
